@@ -74,6 +74,7 @@ QList<QUrl> QLibProxyWrapper::getProxies(const QUrl &url)
     QList<QUrl> ret;
 
     if (factory) {
+        // gcc 6.3.0 fix (ambigous conversion from QByteArray to char*)
         char **proxies = px_proxy_factory_get_proxies(factory, url.toEncoded().data());
         if (proxies) {
             for (int i = 0; proxies[i]; i++) {
